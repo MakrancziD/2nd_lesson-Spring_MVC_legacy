@@ -1,3 +1,4 @@
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: makra
@@ -12,12 +13,13 @@
 </head>
 <body>
 New user
-<form action="new_user">
-    First name: <input type="text" name="Username"><br>
+<form action="#" th:action="@{/}" th:object="${userForm}" method="post">
+    First name: <input type="text" th:field="*{username}" name="Username"><br>
+    <%--<span th:if= "${#fields.hasErrors("username")}" th:errors="*{name}">Name Error</span>--%>
     Credit: <input type="text" name="Credit"><br>
     Vegzettseg:
-    <select id="vegzettseg" name="vegz">
-        <option value="ALT">általános</option>
+    <select  id="vegzettseg" name="vegz">
+        <option value="ELEM">általános</option>
         <option value="HIGH">középiskola</option>
         <option value="COLLEGE">főiskola</option>
         <option value="UNI">egyetem</option>

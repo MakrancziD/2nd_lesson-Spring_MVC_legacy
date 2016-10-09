@@ -1,13 +1,19 @@
 package org.elosztott.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by makra on 2016. 09. 26..
  */
 
 public class NewUserRequest {
 
-
+    @NotNull
+    @Size(min=3, max = 30)
     private String username;
+
+    @NotNull
     private int credit;
     private User.school vegzettseg;
     private User.color color;

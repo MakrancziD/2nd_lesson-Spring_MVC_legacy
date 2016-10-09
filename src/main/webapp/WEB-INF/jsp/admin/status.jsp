@@ -11,7 +11,7 @@
     <title>Status</title>
 </head>
 <body>
-Statusgyulabuta
+
 
 <a href="/Spring_MVC_legacy/admin/new_user">New user</a>
 </body>
