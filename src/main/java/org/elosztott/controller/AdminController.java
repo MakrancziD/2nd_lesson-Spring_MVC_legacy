@@ -6,19 +6,18 @@ import org.elosztott.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.elosztott.service.UserManager;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 /**
  * Created by makra on 2016. 09. 19..
  */
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController
 {
     @Autowired
@@ -30,43 +29,31 @@ public class AdminController
         return "index";
     }
 
-    @RequestMapping(value = "/admin/status", method = RequestMethod.GET)
+    @RequestMapping(value = "/status", method = RequestMethod.GET)
     public String status() { return "status"; }
 
     @RequestMapping(value = "/get_balance", method = RequestMethod.GET)
-    public String getBalance() { return "admin/get_balance"; }
+    public String getBalance() { return "get_balance"; }
 
     @RequestMapping(value = "/new_user", method = RequestMethod.GET)
-    public String showForm(NewUserRequest userForm) {
-        return "admin/new_user";
+    public String showForm(@ModelAttribute NewUserRequest userForm) {
+        return "new_user";
     }
 
     @RequestMapping(value = "/new_user", method = RequestMethod.POST)
-    public String checkUserForm(@Valid NewUserRequest personForm, BindingResult bindingResult) {
+    public String checkUserForm(@ModelAttribute @Valid NewUserRequest newUserRequest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "admin/new_user";
+            return "new_user";
         }
+        User user = new User(
+                newUserRequest.getUsername(),
+                newUserRequest.getVegzettseg(),
+                new ArrayList<String>(),//newUserRequest.getColor()),
+                newUserRequest.getNem()
+        );
+        userManager.addUser(user);
 
-        return "redirect:/results";
+        return "redirect:/admin/status";
     }
-   /* @RequestMapping(value = "admin/new_user", method = RequestMethod.GET)
-    public String new_user(NewUserRequest newUserReq)
-    {
-        if(Strings.isNullOrEmpty(newUserReq.getUsername()))
-        {
-            return "admin/new_user";
-        }
-        else
-        {
-            userManager.addUser(new User(
-                    newUserReq.getUsername(),
-                    newUserReq.getCredit(),
-                    newUserReq.getVegzettseg(),
-                    newUserReq.getColor(),
-                    newUserReq.getNem()
-            ));
-            return "admin/status";
-        }
-    }*/
 }

@@ -2,6 +2,7 @@ package org.elosztott.model;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * Created by makra on 2016. 09. 26..
@@ -15,9 +16,9 @@ public class NewUserRequest {
 
     @NotNull
     private int credit;
-    private User.school vegzettseg;
-    private User.color color;
-    private User.gender nem;
+    private String vegzettseg;
+    private List<String> color;
+    private String nem;
 
     public String getUsername() {
         return username;
@@ -35,27 +36,27 @@ public class NewUserRequest {
         this.credit = credit;
     }
 
-    public User.school getVegzettseg() {
+    public String getVegzettseg() {
         return vegzettseg;
     }
 
-    public void setVegzettseg(User.school vegzettseg) {
+    public void setVegzettseg(String vegzettseg) {
         this.vegzettseg = vegzettseg;
     }
 
-    public User.color getColor() {
+    public List<String> getColor() {
         return color;
     }
 
-    public void setColor(User.color color) {
+    public void setColor(List<String> color) {
         this.color = color;
     }
 
-    public User.gender getNem() {
+    public String getNem() {
         return nem;
     }
 
-    public void setNem(User.gender nem) {
+    public void setNem(String nem) {
         this.nem = nem;
     }
 }

@@ -24,7 +24,7 @@ public class AdminStatusController {
 
     @RequestMapping(value = "status")
     public String status() {
-        return "admin/status";
+        return "status";
     }
 
 }
