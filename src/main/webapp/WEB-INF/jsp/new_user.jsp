@@ -1,6 +1,7 @@
 <%@ page import="org.elosztott.model.NewUserRequest" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: makra
@@ -21,23 +22,23 @@ New user
 %>
 
 <form modelAttribute="newUserRequest" th:action="@{/}" th:object="${userForm}" method="post">
-    Username:
+    <spring:message code="messages.user.name"/>:
     <input type="text" th:field="*{username}" name="Username"><br>
     <%--<span th:if= "${#fields.hasErrors("username")}" th:errors="*{name}">Name Error</span>--%>
-    Vegzettseg:
+    <spring:message code="messages.user.education"/>:
     <select path="vegzettseg">
-        <option value="ELEM">általános</option>
-        <option value="HIGH">középiskola</option>
-        <option value="COLLEGE">főiskola</option>
-        <option value="UNI">egyetem</option>
+        <option value="ELEM"><spring:message code="messages.user.education.elementary"/></option>
+        <option value="HIGH"><spring:message code="messages.user.education.highschool"/></option>
+        <option value="COLLEGE"><spring:message code="messages.user.education.college"/></option>
+        <option value="UNI"><spring:message code="messages.user.education.university"/></option>
     </select>
-    Kedvenc szín:
-    <input type="checkbox" path="color" value="blue">Kék<br>
-    <input type="checkbox" path="color" value="red">Piros<br>
+    <spring:message code="messages.user.color"/>:
+    <input type="checkbox" path="color" value="blue"><spring:message code="messages.user.color.blue"/><br>
+    <input type="checkbox" path="color" value="red"><spring:message code="messages.user.color.red"/><br>
 
-    Nem:
-    <input type="radio" path="gender" value="male">Férfi<br>
-    <input type="radio" path="gender" value="female">Nő<br>
+    <spring:message code="messages.user.gender"/>:
+    <input type="radio" path="gender" value="male"><spring:message code="messages.user.gender.male"/><br>
+    <input type="radio" path="gender" value="female"><spring:message code="messages.user.gender.female"/><br>
 
     <input type="submit" value="Submit">
 </form>
